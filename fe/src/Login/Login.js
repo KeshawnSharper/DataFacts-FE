@@ -45,7 +45,7 @@ return(
             <i className="fa fa-user-circle" />
           </span>
           {/* When the value changes the state will change based on property */}
-          <input className="form-input" id="txt-input" name="username" type="text" placeholder="@UserName" required onChange={e => handleChange(e)}/>
+          <input className="form-input" id="txt-input" name="username" type="text" placeholder="Email" required onChange={e => handleChange(e)}/>
           <br />
           <span className="input-item">
             <i className="fa fa-key" />
