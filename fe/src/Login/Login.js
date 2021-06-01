@@ -19,8 +19,10 @@ const handleChange = e => {
 const Login = e => {
     e.preventDefault()
     setSubmitted(true)
-    if 
-    login(login)
+    if (loginUser.username !== "" && loginUser.password !== ""){
+        login(login)
+    }
+    
 }
 return(
     // Not going to lie I copied some code to template so most of the code here I cant explain I just worked on the state and functions
