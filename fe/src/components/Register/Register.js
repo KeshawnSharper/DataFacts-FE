@@ -11,6 +11,7 @@ let [registerUser,setRegisterUser] = useState({username:"",password:"",re_passwo
 let [submitted,setSubmitted] = useState(false)
 // Handle login state change
 const handleChange = e => {
+  console.log(registerUser)
     setRegisterUser({
     ...registerUser,
     [e.target.name]:e.target.value
@@ -21,9 +22,12 @@ const Register = e => {
     // change submit state to true
     setSubmitted(true)
     // if both the login credentials aren't empty strings execute the login action
-    if (registerUser.username !== "" && registerUser.password !== ""){
+    if (registerUser.re_password === registerUser.password){
+      if (registerUser.username !== "" && registerUser.password !== ""  && registerUser.re_password !== "" ){
         register(registerUser)
     }
+    }
+   
     
 }
 return(
@@ -37,7 +41,7 @@ return(
         <header className="head-form">
           <h2>Register</h2>
           {/* If username or password is empty then send an error message, otherwise send a welcome message */}
-          <p>{submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, sign up for a free Datafacts account"}</p>
+          <p>{submitted && registerUser.password !== registerUser.re_password ? "The passwords provided aren't the same, Please try again" :submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, sign up for a free Datafacts account"}</p>
         </header>
         <br />
         <div className="field-set">
@@ -56,7 +60,7 @@ return(
           <span>
             <i className="fa fa-eye" aria-hidden="true" type="button" id="eye" />
           </span>
-          <input className="form-input" type="password" name="password" placeholder="Password" id="pwd" name="password" required onChange={e => handleChange(e)} />
+          <input className="form-input" type="password" name="re_password" placeholder="Password" id="pwd"  required onChange={e => handleChange(e)} />
           <span>
             <i className="fa fa-eye" aria-hidden="true" type="button" id="eye" />
           </span>
