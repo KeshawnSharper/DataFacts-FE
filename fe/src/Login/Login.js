@@ -5,8 +5,7 @@ import {
   } from "../actions/actions";
 import { connect } from "react-redux";
 
-const Login = (props) => {
-const {user,login} = props
+const Login = ({user,login,error,loading}) => {
     // Set login state
 let [loginUser,setLoginUser] = useState({username:"",password:""})
 let [submitted,setSubmitted] = useState(false)
@@ -25,6 +24,11 @@ const Login = e => {
 return(
     // Not going to lie I copied some code to template so most of the code here I cant explain I just worked on the state and functions
     <div className="overlay">
+        {loading ? 
+        <div class="loader"></div>
+        :
+
+    
     <form>
       <div className="con">
         <header className="head-form">
@@ -60,13 +64,15 @@ return(
         </div>
       </div>
     </form>
+}
   </div>
 )
 }
 function mapStateToProps(state) {
     return {
       user: state.user,
-      loading: state.loading
+      loading: state.loading,
+      error:state.error
     };
   }
   const mapDispatchToProps = (dispatch) => {
