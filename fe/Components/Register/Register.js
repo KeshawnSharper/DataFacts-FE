@@ -2,12 +2,12 @@ import React,{useState} from "react"
 import "./Login.css"
 import {
    login
-  } from "../../../src/actions/actions";
+  } from "../../src/actions/actions";
 import { connect } from "react-redux";
 
 const Login = ({user,login,error,loading}) => {
     // Set login state
-let [loginUser,setLoginUser] = useState({username:"",password:""})
+let [registerUser,setRegisterUser] = useState({username:"",password:"",re_password:""})
 let [submitted,setSubmitted] = useState(false)
 // Handle login state change
 const handleChange = e => {
@@ -16,7 +16,7 @@ const handleChange = e => {
     [e.target.name]:e.target.value
 })
 }
-const Login = e => {
+const Register = e => {
     e.preventDefault()
     // change submit state to true
     setSubmitted(true)
@@ -88,4 +88,4 @@ function mapStateToProps(state) {
       }
     };
   };
-  export default connect(mapStateToProps, mapDispatchToProps)(Login);
+  export default connect(mapStateToProps, mapDispatchToProps)(Register);
