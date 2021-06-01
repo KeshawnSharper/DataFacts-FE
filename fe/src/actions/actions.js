@@ -1,6 +1,5 @@
 import axios from "axios";
 export function login(user) {
-
   return (dispatch) => {
     dispatch({ type: "LOGIN_LOADING" });
     axios
@@ -10,9 +9,9 @@ export function login(user) {
       .then((response) => {
         dispatch({
           type: "LOGIN",
-          payload: response.data.properties
+          payload: {username:response.data.username,id:response.data.id}
         });
-        console.log(21, response.data);
+        localStorage.setItem("token",response.data.token)
       })
       .catch((err) => {
         dispatch({ type: "LOGIN_FAIL", payload: err });

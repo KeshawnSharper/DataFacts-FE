@@ -20,7 +20,7 @@ const Login = e => {
     e.preventDefault()
     setSubmitted(true)
     if (loginUser.username !== "" && loginUser.password !== ""){
-        login(login)
+        login(loginUser)
     }
     
 }
@@ -30,8 +30,6 @@ return(
         {loading ? 
         <div class="loader"></div>
         :
-
-    
     <form>
       <div className="con">
         <header className="head-form">
