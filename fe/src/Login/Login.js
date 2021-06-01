@@ -23,7 +23,7 @@ return(
         <header className="head-form">
           <h2>Log In</h2>
           {/* If username or password is empty then send an error message, otherwise send a welcome message */}
-          <p>{submitted && login.username === "" || submitted && login.password === "" ? "Please provide a username and/or password": "WELCOME, Login with your Datafacts credentials"}</p>
+          <p>{submitted  ? "Please provide a username and/or password": "WELCOME, Login with your Datafacts credentials"}</p>
         </header>
         <br />
         <div className="field-set">
