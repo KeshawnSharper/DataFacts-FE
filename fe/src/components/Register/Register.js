@@ -22,12 +22,13 @@ const Register = e => {
     // change submit state to true
     setSubmitted(true)
     // if both the login credentials aren't empty strings execute the login action
+    if(registerUser.username.includes("@")){
     if (registerUser.re_password === registerUser.password){
       if (registerUser.username !== "" && registerUser.password !== ""  && registerUser.re_password !== "" ){
         register(registerUser)
     }
     }
-   
+  }
     
 }
 return(
@@ -41,7 +42,7 @@ return(
         <header className="head-form">
           <h2>Register</h2>
           {/* If username or password is empty then send an error message, otherwise send a welcome message */}
-          <p>{submitted && registerUser.password !== registerUser.re_password ? "The passwords provided aren't the same, Please try again" :submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, sign up for a free Datafacts account"}</p>
+          <p>{submitted && !registerUser.username.includes("@") ? "The username provided is not an email, Please try again" : submitted && registerUser.password !== registerUser.re_password ? "The passwords provided aren't the same, Please try again" :submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, sign up for a free Datafacts account"}</p>
         </header>
         <br />
         <div className="field-set">
@@ -49,7 +50,7 @@ return(
             <i className="fa fa-user-circle" />
           </span>
           {/* When the value changes the state will change based on property */}
-          <input className="form-input" id="txt-input" name="username" type="text" placeholder="Email" required onChange={e => handleChange(e)}/>
+          <input className="form-input" id="txt-input" name="username" type="email" placeholder="Email" required onChange={e => handleChange(e)}/>
           <br />
           <span className="input-item">
             <i className="fa fa-key" />
