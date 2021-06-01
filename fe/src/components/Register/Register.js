@@ -1,11 +1,11 @@
 import React,{useState} from "react"
 import "../Login/Login.css"
 import {
-  login
+  register
  } from "../../actions/actions";
 import { connect } from "react-redux";
 
-const Register = ({user,login,error,loading}) => {
+const Register = ({user,register,error,loading}) => {
     // Set login state
 let [registerUser,setRegisterUser] = useState({username:"",password:"",re_password:""})
 let [submitted,setSubmitted] = useState(false)
@@ -22,7 +22,7 @@ const Register = e => {
     setSubmitted(true)
     // if both the login credentials aren't empty strings execute the login action
     if (registerUser.username !== "" && registerUser.password !== ""){
-        login(registerUser)
+        register(registerUser)
     }
     
 }
@@ -83,8 +83,8 @@ function mapStateToProps(state) {
 // Login action will send the registerUser state to the redux store to adjust the store based on the response from the backend
   const mapDispatchToProps = (dispatch) => {
     return {
-      login: (user) => {
-        dispatch(login(user));
+      register: (user) => {
+        dispatch(register(user));
       }
     };
   };
