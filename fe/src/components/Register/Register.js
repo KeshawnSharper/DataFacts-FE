@@ -35,9 +35,9 @@ return(
     <form>
       <div className="con">
         <header className="head-form">
-          <h2>Log In</h2>
+          <h2>Register</h2>
           {/* If username or password is empty then send an error message, otherwise send a welcome message */}
-          <p>{submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, Login with your Datafacts credentials"}</p>
+          <p>{submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, sign up for a free Datafacts account"}</p>
         </header>
         <br />
         <div className="field-set">
@@ -56,13 +56,17 @@ return(
           <span>
             <i className="fa fa-eye" aria-hidden="true" type="button" id="eye" />
           </span>
+          <input className="form-input" type="password" name="password" placeholder="Password" id="pwd" name="password" required onChange={e => handleChange(e)} />
+          <span>
+            <i className="fa fa-eye" aria-hidden="true" type="button" id="eye" />
+          </span>
           <br />
           {/* Submits the login credentials if form is filled to be checked by the backend  */}
-          <button className="log-in" onClick={e =>Register(e)}> Log In </button>
+          <button className="log-in" onClick={e =>Register(e)}> Sign Up </button>
         </div>
         <div className="other">
           <button className="btn submits frgt-pass">Forgot Password</button>
-          <button className="btn submits sign-up">Sign Up 
+          <button className="btn submits sign-up">Log In 
             <i className="fa fa-user-plus" aria-hidden="true" />
           </button>
         </div>
