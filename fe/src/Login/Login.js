@@ -1,19 +1,26 @@
 import React,{useState} from "react"
 import "./Login.css"
+import {
+   login
+  } from "../actions/actions";
+import { connect } from "react-redux";
+
 const Login = (props) => {
+const {user,login} = props
     // Set login state
-let [login,setLogin] = useState({username:"",password:""})
+let [loginUser,setLoginUser] = useState({username:"",password:""})
 let [submitted,setSubmitted] = useState(false)
 // Handle login state change
 const handleChange = e => {
-setLogin({
-    ...login,
+    setLoginUser({
+    ...loginUser,
     [e.target.name]:e.target.value
 })
 }
 const Login = e => {
     e.preventDefault()
     setSubmitted(true)
+    login(login)
 }
 return(
     // Not going to lie I copied some code to template so most of the code here I cant explain I just worked on the state and functions
@@ -56,4 +63,17 @@ return(
   </div>
 )
 }
-export default Login
+function mapStateToProps(state) {
+    return {
+      user: state.user,
+      loading: state.loading
+    };
+  }
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      login: (user) => {
+        dispatch(login(user));
+      }
+    };
+  };
+  export default connect(mapStateToProps, mapDispatchToProps)(Login);
