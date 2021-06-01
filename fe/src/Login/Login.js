@@ -18,7 +18,9 @@ const handleChange = e => {
 }
 const Login = e => {
     e.preventDefault()
+    // change submit state to true
     setSubmitted(true)
+    // if both the login credentials aren't empty strings execute the login action
     if (loginUser.username !== "" && loginUser.password !== ""){
         login(loginUser)
     }
@@ -55,6 +57,7 @@ return(
             <i className="fa fa-eye" aria-hidden="true" type="button" id="eye" />
           </span>
           <br />
+          {/* Submits the login credentials if form is filled to be checked by the backend  */}
           <button className="log-in" onClick={e =>Login(e)}> Log In </button>
         </div>
         <div className="other">
@@ -69,6 +72,7 @@ return(
   </div>
 )
 }
+// state variables from the redux store 
 function mapStateToProps(state) {
     return {
       user: state.user,
@@ -76,6 +80,7 @@ function mapStateToProps(state) {
       error:state.error
     };
   }
+// Login action will send the loginUser state to the redux store to adjust the store based on the response from the backend
   const mapDispatchToProps = (dispatch) => {
     return {
       login: (user) => {
