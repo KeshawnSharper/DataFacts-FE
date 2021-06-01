@@ -22,7 +22,8 @@ export const StoreReducer = (state = initState, action) => {
       // Subtract item base price + item quantity
       return {
         ...state,
-        loading: false
+        loading: false,
+        error:true
       };
     default:
       return initState;

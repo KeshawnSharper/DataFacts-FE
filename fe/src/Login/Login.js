@@ -19,6 +19,7 @@ const handleChange = e => {
 const Login = e => {
     e.preventDefault()
     setSubmitted(true)
+    if 
     login(login)
 }
 return(
@@ -34,7 +35,7 @@ return(
         <header className="head-form">
           <h2>Log In</h2>
           {/* If username or password is empty then send an error message, otherwise send a welcome message */}
-          <p>{submitted  ? "Please provide a username and/or password": "WELCOME, Login with your Datafacts credentials"}</p>
+          <p>{submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, Login with your Datafacts credentials"}</p>
         </header>
         <br />
         <div className="field-set">
