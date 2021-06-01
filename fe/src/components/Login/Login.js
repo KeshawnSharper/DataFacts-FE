@@ -3,6 +3,7 @@ import "./Login.css"
 import {
    login
   } from "../../actions/actions";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const Login = ({user,login,error,loading}) => {
@@ -62,9 +63,9 @@ return(
         </div>
         <div className="other">
           <button className="btn submits frgt-pass">Forgot Password</button>
-          <button className="btn submits sign-up">Sign Up 
+         <Link to="/register"> <button className="btn submits sign-up">Sign Up 
             <i className="fa fa-user-plus" aria-hidden="true" />
-          </button>
+          </button> </Link>
         </div>
       </div>
     </form>
