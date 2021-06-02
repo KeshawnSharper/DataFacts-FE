@@ -26,9 +26,7 @@ export const StoreReducer = (state = initState, action) => {
       };
     case "REGISTER":
       return {
-        ...state,
-        loading: false,
-        user: action.payload
+        ...state
       };
     case "REGISTER_FAIL":
       return {
