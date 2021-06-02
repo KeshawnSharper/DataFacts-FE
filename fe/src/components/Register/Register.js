@@ -7,7 +7,8 @@ const Register = ({ user, login, error, loading }) => {
   // Set login state
   let [registerUser, setRegisterUser] = useState({
     username: "",
-    password: ""
+    password: "",
+    re_password: ""
   });
   let [submitted, setSubmitted] = useState(false);
   // Handle login state change
@@ -22,8 +23,10 @@ const Register = ({ user, login, error, loading }) => {
     // change submit state to true
     setSubmitted(true);
     // if both the login credentials aren't empty strings execute the login action
-    if (registerUser.username !== "" && registerUser.password !== "") {
-      register(registerUser);
+    if (registerUser.re_password === registerUser.password) {
+      if (registerUser.username !== "" && registerUser.password !== "") {
+        register(registerUser);
+      }
     }
   };
   return (
@@ -38,7 +41,9 @@ const Register = ({ user, login, error, loading }) => {
               <h2>Register</h2>
               {/* If username or password is empty then send an error message, otherwise send a welcome message */}
               <p>
-                {submitted && error
+                {submitted && registerUser.password !== registerUser.re_password
+                  ? "Passwords do not match, Try again!"
+                  : submitted && error
                   ? "Invalid Credentials, Please Try again"
                   : submitted
                   ? "Please provide a username and/or password"
@@ -73,6 +78,15 @@ const Register = ({ user, login, error, loading }) => {
                 placeholder="Password"
                 id="pwd"
                 name="password"
+                required
+                onChange={(e) => handleChange(e)}
+              />
+              <input
+                className="form-input"
+                type="password"
+                placeholder="Password"
+                id="pwd"
+                name="re_password"
                 required
                 onChange={(e) => handleChange(e)}
               />
