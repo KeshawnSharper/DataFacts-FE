@@ -56,16 +56,19 @@ const Register = ({ user, register, error, loading }) => {
           <div className="con">
             <header className="head-form">
               <h2>Register</h2>
-              {/* If username or password is empty then send an error message, otherwise send a welcome message */}
+              {/* If email doesn't include '@' it's invalid */}
               <p>
                 {submitted && !registerUser.username.includes("@")
                   ? "Email must include '@', Please try again"
-                  : submitted &&
+                  : //  passwords must match or they are registered invalid
+                  submitted &&
                     registerUser.password !== registerUser.re_password
                   ? "Passwords do not match, Try again!"
-                  : submitted && !validatePassword(registerUser.password)
+                  : // password must be valid before registration
+                  submitted && !validatePassword(registerUser.password)
                   ? "Password must contain 1 letter, digit and at least 7 characters"
-                  : submitted && error
+                  : // if there is an error most likely it's because the user exsists
+                  submitted && error
                   ? "User already exsists, Try again"
                   : "WELCOME, Signup with secure credentials for DataFacts"}
               </p>
