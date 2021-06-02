@@ -18,14 +18,29 @@ const Register = ({ user, login, error, loading }) => {
       [e.target.name]: e.target.value
     });
   };
+  function validatePassword(p) {
+    if (p.length < 7) {
+      return false;
+    }
+    if (p.search(/[a-z]/i) < 0) {
+      return false;
+    }
+    if (p.search(/[0-9]/) < 0) {
+      return false;
+    }
+
+    return true;
+  }
   const Register = (e) => {
     e.preventDefault();
     // change submit state to true
     setSubmitted(true);
     // if both the login credentials aren't empty strings execute the login action
     if (registerUser.re_password === registerUser.password) {
-      if (registerUser.username !== "" && registerUser.password !== "") {
-        register(registerUser);
+      if (validatePassword(registerUser.password)) {
+        if (registerUser.username !== "" && registerUser.password !== "") {
+          register(registerUser);
+        }
       }
     }
   };
@@ -43,6 +58,8 @@ const Register = ({ user, login, error, loading }) => {
               <p>
                 {submitted && registerUser.password !== registerUser.re_password
                   ? "Passwords do not match, Try again!"
+                  : submitted && !validatePassword(registerUser.password)
+                  ? "Password must contain 1 letter, digit and at least 7 characters"
                   : submitted && error
                   ? "Invalid Credentials, Please Try again"
                   : submitted
