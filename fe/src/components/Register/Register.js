@@ -3,7 +3,7 @@ import "../Login/Login.css";
 import { register } from "../../actions/actions";
 import { connect } from "react-redux";
 
-const Register = ({ user, login, error, loading }) => {
+const Register = ({ user, register, error, loading }) => {
   // Set login state
   let [registerUser, setRegisterUser] = useState({
     username: "",

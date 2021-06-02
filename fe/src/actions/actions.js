@@ -34,7 +34,23 @@ export function register(user) {
           payload: { username: response.data.username, id: response.data.id }
         });
         // send the token to local storage
-        localStorage.setItem("token", response.data.token);
+        axios
+          .post(`https://datafacts-be.herokuapp.com/users/login`, {
+            username: user.username,
+            password: user.password
+          })
+          .then((response) => {
+            dispatch({
+              // set the user object from redux state to the email and id from the response
+              type: "LOGIN",
+              payload: {
+                username: response.data.username,
+                id: response.data.id
+              }
+            });
+            // send the token to local storage
+            localStorage.setItem("token", response.data.token);
+          });
       })
       .catch((err) => {
         dispatch({ type: "REGISTER_FAIL", payload: err });
