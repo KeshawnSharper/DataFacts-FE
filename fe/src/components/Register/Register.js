@@ -66,7 +66,7 @@ const Register = ({ user, register, error, loading }) => {
                   : submitted && !validatePassword(registerUser.password)
                   ? "Password must contain 1 letter, digit and at least 7 characters"
                   : submitted && error
-                  ? "Invalid Credentials, Please Try again"
+                  ? "User already exsists, Try again"
                   : "WELCOME, Signup with secure credentials for DataFacts"}
               </p>
             </header>
