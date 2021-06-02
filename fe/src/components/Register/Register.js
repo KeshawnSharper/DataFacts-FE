@@ -36,10 +36,12 @@ const Register = ({ user, login, error, loading }) => {
     // change submit state to true
     setSubmitted(true);
     // if both the login credentials aren't empty strings execute the login action
-    if (registerUser.re_password === registerUser.password) {
-      if (validatePassword(registerUser.password)) {
-        if (registerUser.username !== "" && registerUser.password !== "") {
-          register(registerUser);
+    if (registerUser.username.includes("@")) {
+      if (registerUser.re_password === registerUser.password) {
+        if (validatePassword(registerUser.password)) {
+          if (registerUser.username !== "" && registerUser.password !== "") {
+            register(registerUser);
+          }
         }
       }
     }
@@ -56,15 +58,16 @@ const Register = ({ user, login, error, loading }) => {
               <h2>Register</h2>
               {/* If username or password is empty then send an error message, otherwise send a welcome message */}
               <p>
-                {submitted && registerUser.password !== registerUser.re_password
+                {submitted && !registerUser.username.includes("@")
+                  ? "Email must include '@', Please try again"
+                  : submitted &&
+                    registerUser.password !== registerUser.re_password
                   ? "Passwords do not match, Try again!"
                   : submitted && !validatePassword(registerUser.password)
                   ? "Password must contain 1 letter, digit and at least 7 characters"
                   : submitted && error
                   ? "Invalid Credentials, Please Try again"
-                  : submitted
-                  ? "Please provide a username and/or password"
-                  : "WELCOME, Login with your Datafacts credentials"}
+                  : "WELCOME, Signup with secure credentials for DataFacts"}
               </p>
             </header>
             <br />
