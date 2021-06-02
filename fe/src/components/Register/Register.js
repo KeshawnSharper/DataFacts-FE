@@ -17,7 +17,7 @@ const Register = ({ user, login, error, loading }) => {
       [e.target.name]: e.target.value
     });
   };
-  const Login = (e) => {
+  const Register = (e) => {
     e.preventDefault();
     // change submit state to true
     setSubmitted(true);
@@ -86,7 +86,7 @@ const Register = ({ user, login, error, loading }) => {
               </span>
               <br />
               {/* Submits the login credentials if form is filled to be checked by the backend  */}
-              <button className="log-in" onClick={(e) => Login(e)}>
+              <button className="log-in" onClick={(e) => Register(e)}>
                 {" "}
                 Sign Up{" "}
               </button>
