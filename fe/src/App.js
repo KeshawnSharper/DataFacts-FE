@@ -15,6 +15,9 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
+          <Route exact path="/home/:tab">
+            <Register />
+          </Route>
         </Switch>
       </Router>
     </div>
