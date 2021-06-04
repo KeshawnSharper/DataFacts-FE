@@ -42,7 +42,7 @@ return(
         <header className="head-form">
           <h2>Register</h2>
           {/* If username or password is empty then send an error message, otherwise send a welcome message */}
-          <p>{submitted && !registerUser.username.includes("@") ? "The username provided is not an email, Please try again" : submitted && registerUser.password !== registerUser.re_password ? "The passwords provided aren't the same, Please try again" :submitted && error ? "Invalid Credentials, Please Try again" : submitted  ? "Please provide a username and/or password": "WELCOME, sign up for a free Datafacts account"}</p>
+          <p>{submitted && !registerUser.username.includes("@") ? "The username provided is not an email, Please try again" : submitted && registerUser.password !== registerUser.re_password ? "The passwords provided aren't the same, Please try again" :submitted && error ? "Invalid Credentials, Please Try again" : submitted && registerUser.username === "" || submitted && registerUser.password === "" || submitted && registerUser.re_password === ""  ? "Please provide a username and/or password":  "WELCOME, sign up for a free Datafacts account"}</p>
         </header>
         <br />
         <div className="field-set">
