@@ -3,6 +3,8 @@ import "./App.css";
 import React from "react";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
+import Home from "./components/Home/Home"
+import ProtectedRoute from "./ProtectedRoute"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   return (
@@ -15,9 +17,7 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
-          <Route exact path="/home/:tab">
-            <Register />
-          </Route>
+          <ProtectedRoute exact path="/home/:tab" component={Home} />
         </Switch>
       </Router>
     </div>
