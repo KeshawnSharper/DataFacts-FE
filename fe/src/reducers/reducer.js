@@ -7,18 +7,32 @@ export const StoreReducer = (state = initState, action) => {
         ...state,
         loading: true
       };
-      case "LOGIN":
-
+    case "LOGIN":
       return {
         ...state,
         loading: false,
-        user:action.payload
+        user: action.payload
       };
-      case "LOGIN_FAIL":
+    case "LOGIN_FAIL":
       return {
         ...state,
         loading: false,
-        error:true
+        error: true
+      };
+    case "REGISTER_LOADING":
+      return {
+        ...state,
+        loading: true
+      };
+    case "REGISTER":
+      return {
+        ...state
+      };
+    case "REGISTER_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: true
       };
       case "REGISTER_LOADING":
         return {
