@@ -1,6 +1,7 @@
 const initState = {
     loading: false,
     error: false,
-    user:{}
+    user:{},
+    state_population:{}
   };
   export default initState;
