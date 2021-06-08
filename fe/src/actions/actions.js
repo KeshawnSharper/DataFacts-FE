@@ -1,14 +1,23 @@
 import axios from "axios";
 import States from "../data/States"
 // loop through years
-function loopThroughYears(tab){
+let states = States()
+function loopThroughYears(tab,state,dispatch){
   let res = []
-  for (let year = 2014;year < 2020;year++){
-    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:42&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
+  dispatch({
+    type:'GET_STATE_POPULATION_LOADING'
+  })
+  
+  for (let year = 2015;year < 2020;year++){
+    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:${Number(state)}&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
     .then(data => {
-      console.log(data)
+      dispatch({
+        type: "GET_STATE_POPULATION",
+        payload: data.data[1][0]
+      })
     })
   }
+
 }
 // function to login users for register and login actions
 
@@ -27,23 +36,12 @@ function loginUser(user, dispatch) {
 }
 // Get population by state
 export function getStatePopulation(state){
-  
+  console.log(states[state.toUpperCase()])
   return (dispatch) => {
-    //   Load register
-    dispatch({ type: "GET_POPULATION_LOADING" });
-    // send register credentials to backend
-   let result = loopThroughYears("population")
-        dispatch({
-          // Loggs that the user is successfully registered
-          type: "GET_POPULATION",payload:result
-        });
-        // Use the login user action to login the registered user
-       
-   
-        dispatch({ type: "GET_POPULATION_FAIL", payload: "hello" });
-     
-  };
 
+  loopThroughYears("population",states[state.toUpperCase()],dispatch)
+  
+}
 }
 // login action
 export function login(user) {

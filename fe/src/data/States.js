@@ -57,7 +57,7 @@ console.log(stateArray)
 stateArray.map(state => {
     console.log(state)
     if (state){
-        stateObject[state[1].toUpperCase()] = {"Population":state[0],"Index":state[2]}
+        stateObject[state[1].toUpperCase()] = state[2]
     }
 
 })
