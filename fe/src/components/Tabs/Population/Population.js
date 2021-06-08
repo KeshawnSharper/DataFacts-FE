@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { getStatePopulation } from "../../../actions/actions"
 import { connect } from "react-redux";
+import Graphs from "../../Graphs/Graphs";
 
 const Population = ({state_population,getStatePopulation}) => {
    const [place,setPlace] = useState({city:"",state:""})
@@ -26,6 +27,7 @@ const Population = ({state_population,getStatePopulation}) => {
     
    }
     return (
+        <div>
         <form>
         <div className="con">
           <header className="head-form">
@@ -86,6 +88,8 @@ const Population = ({state_population,getStatePopulation}) => {
          
         </div>
       </form>
+      <Graphs state_population={state_population}/>
+      </div>
     )
 }
 function mapStateToProps(state) {
