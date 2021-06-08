@@ -28,6 +28,11 @@ const Population = ({state_population,getStatePopulation}) => {
    }
     return (
         <div>
+            {state_population.length === 6 ?
+            <Graphs state_population={state_population}/>
+            :
+            null
+        }
         <form>
         <div className="con">
           <header className="head-form">
@@ -88,7 +93,7 @@ const Population = ({state_population,getStatePopulation}) => {
          
         </div>
       </form>
-      <Graphs state_population={state_population}/>
+      
       </div>
     )
 }
