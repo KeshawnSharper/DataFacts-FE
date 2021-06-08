@@ -3,12 +3,14 @@ import axios from "axios";
 function loginUser(user, dispatch) {
   return axios
     .post(`https://datafacts-be.herokuapp.com/users/login`, user)
-    .then((response) =>
+    .then((response) => {
       dispatch({
         type: "LOGIN",
         payload: { username: response.data.username, id: response.data.id }
       })
-    )
+      console.log(response)
+      localStorage.setItem("token",response.data.token)
+    })
     .catch((err) => dispatch({ type: "LOGIN_FAIL", payload: err }));
 }
 // login action
