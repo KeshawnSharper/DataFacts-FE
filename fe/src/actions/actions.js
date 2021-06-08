@@ -14,7 +14,7 @@ function loopThroughYears(tab,state,dispatch,state_name){
     .then(data => {
       dispatch({
         type: "GET_STATE_POPULATION",
-        payload: data.data[1][0]
+        payload: {"year":year,"population":Number(data.data[1][0])}
       })
     })
   }
@@ -37,9 +37,7 @@ function loginUser(user, dispatch) {
 }
 // Get population by state
 export function getStatePopulation(state){
-  console.log(states[state.toUpperCase()])
   return (dispatch) => {
-
   loopThroughYears("population",states[state.toUpperCase()],dispatch,state)
 }
 }
