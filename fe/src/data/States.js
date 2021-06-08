@@ -42,7 +42,7 @@ let stateArray = [
 ["1415872","Hawaii","15"],
 ["12671821","Illinois","17"],
 ["6732219","Indiana","18"],
-["3155070","Iowa","19"],
+["3155070","Iowa","19"]
 ["2913314","Kansas","20"],
 ["4467673","Kentucky","21"],
 ["4648794","Louisiana","22"],
@@ -51,7 +51,7 @@ let stateArray = [
 ["6892503","Massachusetts","25"],
 ["9986857","Michigan","26"],
 ["5639632","Minnesota","27"]]
-const states = () => {
+const States = () => {
 let stateObject = {}
 stateArray.map(state => {
 stateObject[state[1]] = {"Population":state[0],"Index":state[2]}
@@ -60,4 +60,4 @@ stateObject[state[1]] = {"Population":state[0],"Index":state[2]}
 
     
 }
-export default states
+export default States

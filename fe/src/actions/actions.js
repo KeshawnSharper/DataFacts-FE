@@ -1,4 +1,5 @@
 import axios from "axios";
+import States from "../data/States"
 // function to login users for register and login actions
 function loginUser(user, dispatch) {
   return axios
@@ -12,6 +13,10 @@ function loginUser(user, dispatch) {
       localStorage.setItem("token",response.data.token)
     })
     .catch((err) => dispatch({ type: "LOGIN_FAIL", payload: err }));
+}
+// Get population by state
+export function getStatePopulation(state){
+return States[`${state}`]
 }
 // login action
 export function login(user) {
