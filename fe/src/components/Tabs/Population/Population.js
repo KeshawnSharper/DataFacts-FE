@@ -1,6 +1,8 @@
 import React, { useState } from "react"
+import { getStatePopulation } from "../../../actions/actions"
+import { connect } from "react-redux";
 
-const Population = props => {
+const Population = ({state_population,getStatePopulation}) => {
    const [place,setPlace] = useState({city:"",state:""})
     const handleChange = e => {
         setPlace({
@@ -8,6 +10,10 @@ const Population = props => {
             [e.target.name]:e.target.value
         })
    }
+//    const handleSubmit = e => {
+       
+//     getStatePopulation(e)
+//    }
     return (
         <form>
         <div className="con">
@@ -71,4 +77,16 @@ const Population = props => {
       </form>
     )
 }
-export default Population
+function mapStateToProps(state) {
+    return {
+     state_population:state.state_population
+    };
+  }
+const mapDispatchToProps = (dispatch) => {
+    return {
+      getStatePopulation: (state) => {
+        dispatch(getStatePopulation(state));
+      }
+    };
+  };
+  export default connect(mapStateToProps, mapDispatchToProps)(Population);
