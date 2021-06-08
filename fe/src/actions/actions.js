@@ -1,6 +1,17 @@
 import axios from "axios";
 import States from "../data/States"
+// loop through years
+function loopThroughYears(tab){
+  let res = []
+  for (let year = 2014;year < 2020;year++){
+    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:42&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
+    .then(data => {
+      console.log(data)
+    })
+  }
+}
 // function to login users for register and login actions
+
 function loginUser(user, dispatch) {
   return axios
     .post(`https://datafacts-be.herokuapp.com/users/login`, user)
@@ -16,7 +27,23 @@ function loginUser(user, dispatch) {
 }
 // Get population by state
 export function getStatePopulation(state){
-return States[`${state}`]
+  
+  return (dispatch) => {
+    //   Load register
+    dispatch({ type: "GET_POPULATION_LOADING" });
+    // send register credentials to backend
+   let result = loopThroughYears("population")
+        dispatch({
+          // Loggs that the user is successfully registered
+          type: "GET_POPULATION",payload:result
+        });
+        // Use the login user action to login the registered user
+       
+   
+        dispatch({ type: "GET_POPULATION_FAIL", payload: "hello" });
+     
+  };
+
 }
 // login action
 export function login(user) {

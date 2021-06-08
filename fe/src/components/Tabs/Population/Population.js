@@ -5,15 +5,26 @@ import { connect } from "react-redux";
 const Population = ({state_population,getStatePopulation}) => {
    const [place,setPlace] = useState({city:"",state:""})
     const handleChange = e => {
+        console.log(place)
         setPlace({
             ...place,
             [e.target.name]:e.target.value
         })
    }
-//    const handleSubmit = e => {
-       
-//     getStatePopulation(e)
-//    }
+   const handleSubmit = e => {
+    e.preventDefault()
+    if (place.state !== ""){
+        
+           if (place.city !== ""){
+
+           }
+           else{
+               console.log(place.state)
+            getStatePopulation(place.state)
+           }
+       }
+    
+   }
     return (
         <form>
         <div className="con">
@@ -37,7 +48,7 @@ const Population = ({state_population,getStatePopulation}) => {
             <input
               className="form-input"
               id="txt-input"
-              name="State"
+              name="state"
               type="text"
               placeholder="State"
               required
@@ -52,7 +63,7 @@ const Population = ({state_population,getStatePopulation}) => {
             <input
               className="form-input"
               type="text"
-              name="City"
+              name="city"
               placeholder="City"
               id="pwd"
               onChange={(e) => handleChange(e)}
@@ -67,7 +78,7 @@ const Population = ({state_population,getStatePopulation}) => {
             </span>
             <br />
             {/* Submits the login credentials if form is filled to be checked by the backend  */}
-            <button className="log-in">
+            <button className="log-in" onClick={e => handleSubmit(e)}>
               {" "}
               Find Population{" "}
             </button>
