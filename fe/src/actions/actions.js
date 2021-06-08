@@ -2,10 +2,11 @@ import axios from "axios";
 import States from "../data/States"
 // loop through years
 let states = States()
-function loopThroughYears(tab,state,dispatch){
+function loopThroughYears(tab,state,dispatch,state_name){
   let res = []
   dispatch({
-    type:'GET_STATE_POPULATION_LOADING'
+    type:'GET_STATE_POPULATION_LOADING',
+    payload:state_name
   })
   
   for (let year = 2015;year < 2020;year++){
@@ -39,8 +40,7 @@ export function getStatePopulation(state){
   console.log(states[state.toUpperCase()])
   return (dispatch) => {
 
-  loopThroughYears("population",states[state.toUpperCase()],dispatch)
-  
+  loopThroughYears("population",states[state.toUpperCase()],dispatch,state)
 }
 }
 // login action
