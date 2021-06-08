@@ -51,6 +51,23 @@ export const StoreReducer = (state = initState, action) => {
           loading: false,
           error:true
         };
+        case "GET_STATE_POPULATION_LOADING":
+          return {
+            ...state,
+            loading: true
+          };
+          case "GET_STATE_POPULATION":
+          return {
+            ...state,
+            loading: false,
+            state_population:action.payload
+          };
+          case "GET_STATE_POPULATION_FAIL":
+          return {
+            ...state,
+            loading: false,
+            error:true
+          };
     default:
       return initState;
   }
