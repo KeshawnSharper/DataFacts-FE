@@ -11,7 +11,7 @@ function loopThroughYears(tab,place,dispatch){
   })
 
   for (let year = 2015;year < 2020;year++){
-    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:${Number(states[place.state.toUpperCase()])}&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
+    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:${states[place.state.toUpperCase()]}&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
     .then(data => {
       console.log(data)
       dispatch({
@@ -27,7 +27,7 @@ function loopThroughYears(tab,place,dispatch){
       type:'GET_POPULATION_LOADING',
       payload:place.city
     })
-    axios.get(`https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=place:*&in=state:${Number(states[place.state.toUpperCase()])}`)
+    axios.get(`https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=place:*&in=state:${states[place.state.toUpperCase()]}`)
     .then(data => {
       console.log(data.data)
       let place_code = data.data.filter(setting => setting[0].toUpperCase() === `${place.city } City, ${place.state}`.toUpperCase() )[0][3]
