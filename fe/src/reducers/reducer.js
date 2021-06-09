@@ -69,6 +69,16 @@ export const StoreReducer = (state = initState, action) => {
             loading: false,
             error:true
           };
+          case "RESET":
+            if (action.payload === "state_population"){
+              return {
+                ...state,
+                loading: false,
+                error:false,
+                state_population:[]
+              }
+            }
+           
     default:
       return initState;
   }

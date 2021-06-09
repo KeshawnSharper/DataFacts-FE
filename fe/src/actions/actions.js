@@ -74,3 +74,14 @@ export function register(user) {
       });
   };
 }
+// reset the array 
+export function reset(tab) {
+  return (dispatch) => {
+    dispatch({
+      // Loggs that the user is successfully registered
+      type: "RESET",
+      payload:tab
+    });
+  }
+}
+

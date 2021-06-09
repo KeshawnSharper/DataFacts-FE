@@ -1,10 +1,11 @@
 import React, { useState } from "react"
-import { getStatePopulation } from "../../../actions/actions"
+import { getStatePopulation,reset } from "../../../actions/actions"
 import { connect } from "react-redux";
 import Graphs from "../../Graphs/Graphs";
 
-const Population = ({state_population,getStatePopulation}) => {
+const Population = ({state_population,getStatePopulation,error,loading,reset}) => {
    const [place,setPlace] = useState({city:"",state:""})
+   const [show,setShow] = useState(false)
     const handleChange = e => {
         console.log(place)
         setPlace({
@@ -14,6 +15,7 @@ const Population = ({state_population,getStatePopulation}) => {
    }
    const handleSubmit = e => {
     e.preventDefault()
+    console.log(error)
     if (place.state !== ""){
         
            if (place.city !== ""){
@@ -21,30 +23,43 @@ const Population = ({state_population,getStatePopulation}) => {
            }
            else{
                console.log(place.state)
+
             getStatePopulation(place.state)
+           
            }
        }
     
+      
+      console.log(show)
+    
    }
+   
     return (
         <div>
+          { !loading && state_population.length === 6 && !error  ? 
+          <div>
             {state_population.length === 6 ?
+            <div style={{"width":"80%"}}>
             <Graphs state_population={state_population}/>
+            <button className="log-in" onClick={e => handleSubmit(e)}>
+              {" "}
+              Save Population{" "}
+            </button>
+            <button className="log-in" onClick={e => reset("state_population")} style={{"margin-left":"20px"}}>
+              {" "}
+              Back{" "}
+            </button>
+            </div>
             :
             null
         }
+        </div>
+  :
+        
         <form>
         <div className="con">
           <header className="head-form">
             <h2>Find Population</h2>
-            {/* If username or password is empty then send an error message, otherwise send a welcome message */}
-            {/* <p>
-              {submitted && error
-                ? "Invalid Credentials, Please Try again"
-                : submitted
-                ? "Please provide a username and/or password"
-                : "WELCOME, Login with your Datafacts credentials"}
-            </p> */}
           </header>
           <br />
           <div className="field-set">
@@ -85,28 +100,36 @@ const Population = ({state_population,getStatePopulation}) => {
             </span>
             <br />
             {/* Submits the login credentials if form is filled to be checked by the backend  */}
-            <button className="log-in" onClick={e => handleSubmit(e)}>
+            <button className="log-in" onClick={e => {
+              setShow(true)
+              handleSubmit(e)}}>
               {" "}
               Find Population{" "}
             </button>
           </div>
          
         </div>
+        
       </form>
-      
+}
       </div>
     )
 }
 function mapStateToProps(state) {
     return {
-     state_population:state.state_population
+     state_population:state.state_population,
+     error:state.error,
+     loading:state.loading
     };
   }
 const mapDispatchToProps = (dispatch) => {
     return {
       getStatePopulation: (state) => {
         dispatch(getStatePopulation(state));
+      },
+      reset: (tab) => {
+        dispatch(reset(tab))
       }
-    };
+    }
   };
   export default connect(mapStateToProps, mapDispatchToProps)(Population);
