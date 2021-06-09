@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import { getStatePopulation,reset,saveData } from "../../../actions/actions"
+import { getPopulation,reset,saveData } from "../../../actions/actions"
 import { connect } from "react-redux";
 import Graphs from "../../Graphs/Graphs";
 import States from "../../../data/States"
-const Population = ({state_population,getStatePopulation,error,loading,reset,saveData}) => {
+const Population = ({population,getPopulation,error,loading,reset,saveData}) => {
    const [place,setPlace] = useState({city:"",state:""})
    const [show,setShow] = useState(false)
     const handleChange = e => {
@@ -16,29 +16,16 @@ const Population = ({state_population,getStatePopulation,error,loading,reset,sav
    const handleSubmit = e => {
     e.preventDefault()
     console.log(error)
-    if (place.state !== ""){
-        
-           if (place.city !== ""){
-
-           }
-           else{
-               console.log(place.state)
-
-            getStatePopulation(place.state)
-           
-           }
+    getPopulation(place)
        }
     
       
-      console.log(show)
-    
-   }
    const handleSave = e => {
      e.preventDefault()
      if (!place.city){
        let data = {"user_id":localStorage.getItem("id"),
-      "data":state_population,
-      "id":`${localStorage.getItem("id")}_population_${States()[state_population[0].toUpperCase()]}_null`
+      "data":population,
+      "id":`${localStorage.getItem("id")}_population_${States()[population[0].toUpperCase()]}_null`
       }
       saveData(data,"state_population")
      }
@@ -46,11 +33,11 @@ const Population = ({state_population,getStatePopulation,error,loading,reset,sav
    
     return (
         <div>
-          { !loading && state_population.length === 6 && !error  ? 
+          { !loading && population.length === 6 && !error  ? 
           <div>
-            {state_population.length === 6 ?
+            {population.length === 6 ?
             <div style={{"width":"80%"}}>
-            <Graphs state_population={state_population}/>
+            <Graphs population={population}/>
             <button className="log-in" onClick={e => handleSave(e)}>
               {" "}
               Save Population{" "}
@@ -127,15 +114,15 @@ const Population = ({state_population,getStatePopulation,error,loading,reset,sav
 }
 function mapStateToProps(state) {
     return {
-     state_population:state.state_population,
+     population:state.population,
      error:state.error,
      loading:state.loading
     };
   }
 const mapDispatchToProps = (dispatch) => {
     return {
-      getStatePopulation: (state) => {
-        dispatch(getStatePopulation(state));
+      getPopulation: (state) => {
+        dispatch(getPopulation(state));
       },
       reset: (tab) => {
         dispatch(reset(tab))

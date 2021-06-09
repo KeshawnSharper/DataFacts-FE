@@ -2,15 +2,32 @@ import axios from "axios";
 import States from "../data/States"
 // loop through years
 let states = States()
-function loopThroughYears(tab,state,dispatch,state_name){
+function loopThroughYears(tab,place,dispatch,){
   let res = []
+  if(place.city === ""){
   dispatch({
-    type:'GET_STATE_POPULATION_LOADING',
-    payload:state_name
+    type:'GET_POPULATION_LOADING',
+    payload:place.state
   })
-  
+
   for (let year = 2015;year < 2020;year++){
-    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:${Number(state)}&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
+    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:${Number(states[place.state.toUpperCase()])}&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
+    .then(data => {
+      dispatch({
+        type: "GET_POPULATION",
+        payload: {"year":year,"population":Number(data.data[1][0])}
+      })
+    })
+  }
+
+}
+  else{
+    dispatch({
+      type:'GET_POPULATION_LOADING',
+      payload:place.city
+    })
+  for (let year = 2015;year < 2020;year++){
+    axios.get(`https://api.census.gov/data/${year}/pep/${tab}?get=POP&for=state:${Number(place.state)}&key=b4f1226e4e527db3a8c7fe012fc73663bb98bf3f`)
     .then(data => {
       dispatch({
         type: "GET_STATE_POPULATION",
@@ -18,7 +35,7 @@ function loopThroughYears(tab,state,dispatch,state_name){
       })
     })
   }
-
+}
 }
 // function to login users for register and login actions
 
@@ -52,11 +69,12 @@ function saveGraphData(data, tab,dispatch) {
     .catch((err) => dispatch({ type: "SAVE_DATA_FAIL", payload: err }));
 }
 // Get population by state
-export function getStatePopulation(state){
+export function getPopulation(place){
   return (dispatch) => {
-  loopThroughYears("population",states[state.toUpperCase()],dispatch,state)
+  loopThroughYears("population",place,dispatch)
 }
-}
+  }
+  
 // login action
 export function login(user) {
   return (dispatch) => {
