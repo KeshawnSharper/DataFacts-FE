@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import { getStatePopulation,reset } from "../../../actions/actions"
+import { getStatePopulation,reset,saveData } from "../../../actions/actions"
 import { connect } from "react-redux";
 import Graphs from "../../Graphs/Graphs";
 
-const Population = ({state_population,getStatePopulation,error,loading,reset}) => {
+const Population = ({state_population,getStatePopulation,error,loading,reset,saveData}) => {
    const [place,setPlace] = useState({city:"",state:""})
    const [show,setShow] = useState(false)
     const handleChange = e => {
@@ -33,6 +33,16 @@ const Population = ({state_population,getStatePopulation,error,loading,reset}) =
       console.log(show)
     
    }
+   const handleSave = e => {
+     e.preventDefault()
+     if (!place.city){
+       let data = {"user_id":140,
+      "data":state_population,
+      "id":"140_population_42_null"
+      }
+      saveData(data,"state_population")
+     }
+   }
    
     return (
         <div>
@@ -41,7 +51,7 @@ const Population = ({state_population,getStatePopulation,error,loading,reset}) =
             {state_population.length === 6 ?
             <div style={{"width":"80%"}}>
             <Graphs state_population={state_population}/>
-            <button className="log-in" onClick={e => handleSubmit(e)}>
+            <button className="log-in" onClick={e => handleSave(e)}>
               {" "}
               Save Population{" "}
             </button>
@@ -129,6 +139,9 @@ const mapDispatchToProps = (dispatch) => {
       },
       reset: (tab) => {
         dispatch(reset(tab))
+      },
+      saveData: (data,tab) => {
+        dispatch(saveData(data,tab))
       }
     }
   };

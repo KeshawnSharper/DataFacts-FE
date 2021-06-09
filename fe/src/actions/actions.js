@@ -36,16 +36,16 @@ function loginUser(user, dispatch) {
     .catch((err) => dispatch({ type: "LOGIN_FAIL", payload: err }));
 }
 // 
-function saveGraphData(data, dispatch) {
+function saveGraphData(data, tab,dispatch) {
   return axios
-    .post(`http://localhost:3000/facts`, data)
+    .post(`http://localhost:5000/facts`, data)
     .then((response) => {
       dispatch({
         type: "SAVE_DATA",
-        payload: data
+        payload: data,
+        tab:tab
       })
       console.log(response)
-      localStorage.setItem("token",response.data.token)
     })
     .catch((err) => dispatch({ type: "SAVE_DATA_FAIL", payload: err }));
 }

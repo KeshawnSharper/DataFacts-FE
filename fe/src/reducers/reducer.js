@@ -89,7 +89,7 @@ export const StoreReducer = (state = initState, action) => {
                 return {
                   ...state,
                   loading: false,
-                  saved_graphs:[...saved_graphs,action.payload]
+                  saved_graphs:[...state.saved_graphs,action.payload]
                 }
                 case "SAVE_DATA_FAIL":
             
