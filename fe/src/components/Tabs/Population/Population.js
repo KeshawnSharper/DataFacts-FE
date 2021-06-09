@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { getStatePopulation,reset,saveData } from "../../../actions/actions"
 import { connect } from "react-redux";
 import Graphs from "../../Graphs/Graphs";
-
+import States from "../../../data/States"
 const Population = ({state_population,getStatePopulation,error,loading,reset,saveData}) => {
    const [place,setPlace] = useState({city:"",state:""})
    const [show,setShow] = useState(false)
@@ -36,9 +36,9 @@ const Population = ({state_population,getStatePopulation,error,loading,reset,sav
    const handleSave = e => {
      e.preventDefault()
      if (!place.city){
-       let data = {"user_id":140,
+       let data = {"user_id":localStorage.getItem("id"),
       "data":state_population,
-      "id":"140_population_42_null"
+      "id":`${localStorage.getItem("id")}_population_${States()[state_population[0].toUpperCase()]}_null`
       }
       saveData(data,"state_population")
      }

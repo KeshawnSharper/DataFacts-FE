@@ -32,6 +32,8 @@ function loginUser(user, dispatch) {
       })
       console.log(response)
       localStorage.setItem("token",response.data.token)
+      localStorage.setItem("username",response.data.username)
+      localStorage.setItem("id",response.data.id)
     })
     .catch((err) => dispatch({ type: "LOGIN_FAIL", payload: err }));
 }
