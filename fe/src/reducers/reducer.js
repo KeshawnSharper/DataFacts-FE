@@ -70,12 +70,12 @@ export const StoreReducer = (state = initState, action) => {
             error:true
           };
           case "RESET":
-            if (action.payload === "state_population"){
+            if (action.payload === "population"){
               return {
                 ...state,
                 loading: false,
                 error:false,
-                state_population:[]
+                population:[]
               }
             }
             case "SAVE_DATA_LOADING":

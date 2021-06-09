@@ -15,7 +15,6 @@ const Population = ({population,getPopulation,error,loading,reset,saveData}) => 
    }
    const handleSubmit = e => {
     e.preventDefault()
-    console.log(error)
     getPopulation(place)
        }
     
@@ -42,7 +41,7 @@ const Population = ({population,getPopulation,error,loading,reset,saveData}) => 
               {" "}
               Save Population{" "}
             </button>
-            <button className="log-in" onClick={e => reset("state_population")} style={{"margin-left":"20px"}}>
+            <button className="log-in" onClick={e => reset("population")} style={{"margin-left":"20px"}}>
               {" "}
               Back{" "}
             </button>
