@@ -35,6 +35,20 @@ function loginUser(user, dispatch) {
     })
     .catch((err) => dispatch({ type: "LOGIN_FAIL", payload: err }));
 }
+// 
+function saveGraphData(data, dispatch) {
+  return axios
+    .post(`http://localhost:3000/facts`, data)
+    .then((response) => {
+      dispatch({
+        type: "SAVE_DATA",
+        payload: data
+      })
+      console.log(response)
+      localStorage.setItem("token",response.data.token)
+    })
+    .catch((err) => dispatch({ type: "SAVE_DATA_FAIL", payload: err }));
+}
 // Get population by state
 export function getStatePopulation(state){
   return (dispatch) => {
@@ -48,7 +62,7 @@ export function login(user) {
     dispatch({ type: "LOGIN_LOADING" });
     // send login credentials from Login page to the backend
     loginUser(user, dispatch);
-  };
+  }
 }
 // register action that logs user in once registered
 export function register(user) {
@@ -82,6 +96,14 @@ export function reset(tab) {
       type: "RESET",
       payload:tab
     });
+  }
+}
+export function saveData(data,tab) {
+  return (dispatch) => {
+    //   Load Login
+    dispatch({ type: "SAVE_DATA_LOADING" });
+    // send login credentials from Login page to the backend
+    saveGraphData(data, tab,dispatch);
   }
 }
 

@@ -78,6 +78,27 @@ export const StoreReducer = (state = initState, action) => {
                 state_population:[]
               }
             }
+            case "SAVE_DATA_LOADING":
+            
+              return {
+                ...state,
+                loading: true,
+              }
+              case "SAVE_DATA":
+            
+                return {
+                  ...state,
+                  loading: false,
+                  saved_graphs:[...saved_graphs,action.payload]
+                }
+                case "SAVE_DATA_FAIL":
+            
+                  return {
+                    ...state,
+                    loading: false,
+                    error:true
+                  }
+
            
     default:
       return initState;
