@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../Login/Login.css";
 import { register } from "../../actions/actions";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
 
 const Register = ({ user, register, error, loading }) => {
   // Set login state
@@ -48,6 +49,11 @@ const Register = ({ user, register, error, loading }) => {
   };
   return (
     // Not going to lie I copied some code to template so most of the code here I cant explain I just worked on the state and functions
+    <>
+    {
+      localStorage.getItem("id") ?
+      <Redirect to={`/home/population`} />
+    :
     <div className="overlay">
       {loading ? (
         <div class="loader"></div>
@@ -139,6 +145,8 @@ const Register = ({ user, register, error, loading }) => {
         </form>
       )}
     </div>
+}
+</>
   );
 };
 // state variables from the redux store
