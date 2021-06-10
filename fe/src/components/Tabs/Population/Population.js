@@ -21,10 +21,17 @@ const Population = ({population,getPopulation,error,loading,reset,saveData}) => 
       
    const handleSave = e => {
      e.preventDefault()
-     if (!place.city){
+     if (!population[1]){
        let data = {"user_id":localStorage.getItem("id"),
       "data":population,
       "id":`${localStorage.getItem("id")}_population_${States()[population[0].toUpperCase()]}_null`
+      }
+      saveData(data,"state_population")
+     }
+     else{
+      let data = {"user_id":localStorage.getItem("id"),
+      "data":population,
+      "id":`${localStorage.getItem("id")}_population_${States()[population[0].toUpperCase()]}_${population[1].toUpperCase()}`
       }
       saveData(data,"state_population")
      }
@@ -32,9 +39,9 @@ const Population = ({population,getPopulation,error,loading,reset,saveData}) => 
    
     return (
         <div>
-          { !loading && population.length === 6 && !error  ? 
+          { !loading && population.length === 7 && !error  ? 
           <div>
-            {population.length === 6 ?
+            {population.length === 7 ?
             <div style={{"width":"80%"}}>
             <Graphs population={population}/>
             <button className="log-in" onClick={e => handleSave(e)}>

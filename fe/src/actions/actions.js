@@ -7,7 +7,8 @@ function loopThroughYears(tab,place,dispatch){
   if(place.city === ""){
   dispatch({
     type:'GET_POPULATION_LOADING',
-    payload:place.state
+    state:place.state,
+    city:null,
   })
 
   for (let year = 2015;year < 2020;year++){
@@ -25,7 +26,8 @@ function loopThroughYears(tab,place,dispatch){
   else{
     dispatch({
       type:'GET_POPULATION_LOADING',
-      payload:place.city
+      state:place.state,
+      city:place.city
     })
     axios.get(`https://api.census.gov/data/2019/pep/population?get=NAME,POP&for=place:*&in=state:${states[place.state.toUpperCase()]}`)
     .then(data => {

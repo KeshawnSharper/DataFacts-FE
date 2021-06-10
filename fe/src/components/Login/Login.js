@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import "./Login.css";
 import { login } from "../../actions/actions";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
 
-const Login = ({ user, login, error, loading }) => {
+const Login = (props) => {
   // Set login state
   let [loginUser, setLoginUser] = useState({ username: "", password: "" });
   let [submitted, setSubmitted] = useState(false);
+  let { user, login, error, loading } = props
   // Handle login state change
   const handleChange = (e) => {
+    props.history.push("register")
     setLoginUser({
       ...loginUser,
       [e.target.name]: e.target.value
@@ -21,10 +24,16 @@ const Login = ({ user, login, error, loading }) => {
     // if both the login credentials aren't empty strings execute the login action
     if (loginUser.username !== "" && loginUser.password !== "") {
       login(loginUser);
+      
     }
   };
   return (
     // Not going to lie I copied some code to template so most of the code here I cant explain I just worked on the state and functions
+    <>
+    {
+      localStorage.getItem("id") ?
+      <Redirect to={`/home/population`} />
+    :
     <div className="overlay">
       {loading ? (
         <div class="loader"></div>
@@ -99,6 +108,8 @@ const Login = ({ user, login, error, loading }) => {
         </form>
       )}
     </div>
+}
+    </>
   );
 };
 // state variables from the redux store
