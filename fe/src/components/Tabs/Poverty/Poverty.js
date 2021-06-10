@@ -7,15 +7,15 @@ const Poverty = ({population,getPopulation,error,loading,reset,saveData}) => {
     const [year,setYear] = useState(null)
     const [show,setShow] = useState(false)
     const handleChange = e => {
-        console.log(place)
-        setPlace({
-            ...place,
-            [e.target.name]:e.target.value
-        })
+        console.log(year)
+        // setYear({
+        //     ...year,
+        //     [e.target.name]:e.target.value
+        // })
    }
    const handleSubmit = e => {
     e.preventDefault()
-    getPopulation(place)
+    // getPopulation(place)
        }
     
       
@@ -107,17 +107,17 @@ function mapStateToProps(state) {
      loading:state.loading
     };
   }
-const mapDispatchToProps = (dispatch) => {
-    return {
-      getPoverty: (tab) => {
-        dispatch(getPopulation(state));
-      },
-      reset: (tab) => {
-        dispatch(reset(tab))
-      },
-      saveData: (data,tab) => {
-        dispatch(saveData(data,tab))
-      }
-    }
-  };
-  export default connect(mapStateToProps, mapDispatchToProps)(Population);
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//       getPoverty: (tab) => {
+//         dispatch(getPopulation(state));
+//       },
+//       reset: (tab) => {
+//         dispatch(reset(tab))
+//       },
+//       saveData: (data,tab) => {
+//         dispatch(saveData(data,tab))
+//       }
+//     }
+//   };
+  export default connect(mapStateToProps )(Poverty);

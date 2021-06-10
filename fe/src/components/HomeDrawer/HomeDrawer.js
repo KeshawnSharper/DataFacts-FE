@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,7 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Population from '../Tabs/Population/Population';
-
+import Poverty from '../Tabs/Poverty/Poverty';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
+  const [tab,setTab] = useState("Population")
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -131,22 +132,14 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
+          {['Population', 'Poverty', 'Send email', 'Drafts'].map((text, index) => (
+            <ListItem button key={text} onClick={() => setTab(text)}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+       
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -154,7 +147,12 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
+        {tab === "Population" ?
         <Population />
+      :
+      <Poverty />  
+      }
+        
       </main>
     </div>
   );
