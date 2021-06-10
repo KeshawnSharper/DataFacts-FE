@@ -136,4 +136,6 @@ export function saveData(data,tab) {
     saveGraphData(data, tab,dispatch);
   }
 }
-
+export function getPoverty(){
+  
+}
