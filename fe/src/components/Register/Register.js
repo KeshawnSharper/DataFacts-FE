@@ -3,8 +3,12 @@ import "../Login/Login.css";
 import { register } from "../../actions/actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
 
 const Register = ({ user, register, error, loading }) => {
+  // use history: I use this to route to different pages on events
+  const history = useHistory();
+
   // Set login state
   let [registerUser, setRegisterUser] = useState({
     username: "",
@@ -42,6 +46,7 @@ const Register = ({ user, register, error, loading }) => {
         if (validatePassword(registerUser.password)) {
           if (registerUser.username !== "" && registerUser.password !== "") {
             register(registerUser);
+            history.push(`/home/population`)
           }
         }
       }
