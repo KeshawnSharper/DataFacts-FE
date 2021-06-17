@@ -3,6 +3,7 @@ import "./Login.css";
 import { login } from "../../actions/actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
+import { Link } from 'react-router-dom'
 
 const Login = (props) => {
   // Set login state
@@ -11,7 +12,6 @@ const Login = (props) => {
   let { user, login, error, loading } = props
   // Handle login state change
   const handleChange = (e) => {
-    props.history.push("register")
     setLoginUser({
       ...loginUser,
       [e.target.name]: e.target.value
@@ -99,10 +99,11 @@ const Login = (props) => {
             </div>
             <div className="other">
               <button className="btn submits frgt-pass">Forgot Password</button>
-              <button className="btn submits sign-up">
+              <Link to={`/register`}><button className="btn submits sign-up">
                 Sign Up
                 <i className="fa fa-user-plus" aria-hidden="true" />
               </button>
+              </Link>
             </div>
           </div>
         </form>

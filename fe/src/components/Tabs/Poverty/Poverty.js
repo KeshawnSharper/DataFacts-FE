@@ -1,54 +1,51 @@
 import React, { useState } from "react"
-import { getPopulation,reset,saveData } from "../../../actions/actions"
+import { getPoverty,reset,saveData } from "../../../actions/actions"
 import { connect } from "react-redux";
-import Graphs from "../../Graphs/Graphs";
+import BarGraphs from "../../Graphs/BarGraphs";
 import States from "../../../data/States"
-const Poverty = ({population,getPopulation,error,loading,reset,saveData}) => {
+const Poverty = ({poverty,getPoverty,error,loading,reset,saveData}) => {
     const [year,setYear] = useState(null)
     const [show,setShow] = useState(false)
     const handleChange = e => {
         console.log(year)
-        // setYear({
-        //     ...year,
-        //     [e.target.name]:e.target.value
-        // })
+        setYear(e.target.value)
    }
    const handleSubmit = e => {
     e.preventDefault()
-    // getPopulation(place)
+    // getPoverty(year)
        }
     
       
    const handleSave = e => {
      e.preventDefault()
-     if (!population[1]){
-       let data = {"user_id":localStorage.getItem("id"),
-      "data":population,
-      "id":`${localStorage.getItem("id")}_population_${States()[population[0].toUpperCase()]}_null`
-      }
-      saveData(data,"state_population")
-     }
-     else{
-      let data = {"user_id":localStorage.getItem("id"),
-      "data":population,
-      "id":`${localStorage.getItem("id")}_population_${States()[population[0].toUpperCase()]}_${population[1].toUpperCase()}`
-      }
-      saveData(data,"state_population")
-     }
+    //  if (!population[1]){
+    //    let data = {"user_id":localStorage.getItem("id"),
+    //   "data":population,
+    //   "id":`${localStorage.getItem("id")}_population_${States()[population[0].toUpperCase()]}_null`
+    //   }
+    //   saveData(data,"state_population")
+    //  }
+    //  else{
+    //   let data = {"user_id":localStorage.getItem("id"),
+    //   "data":population,
+    //   "id":`${localStorage.getItem("id")}_population_${States()[population[0].toUpperCase()]}_${population[1].toUpperCase()}`
+    //   }
+    //   saveData(data,"state_population")
+    //  }
    }
    
     return (
         <div>
-          { !loading && population.length === 7 && !error  ? 
+          { !loading && poverty.length === 7 && !error  ? 
           <div>
-            {population.length === 7 ?
+            {poverty.length === 7 ?
             <div style={{"width":"80%"}}>
-            <Graphs population={population}/>
+            <BarGraphs poverty={poverty}/>
             <button className="log-in" onClick={e => handleSave(e)}>
               {" "}
               Save Population{" "}
             </button>
-            <button className="log-in" onClick={e => reset("population")} style={{"margin-left":"20px"}}>
+            <button className="log-in" onClick={e => reset("poverty")} style={{"margin-left":"20px"}}>
               {" "}
               Back{" "}
             </button>
@@ -102,22 +99,22 @@ const Poverty = ({population,getPopulation,error,loading,reset,saveData}) => {
 }
 function mapStateToProps(state) {
     return {
-     population:state.population,
+     poverty:state.poverty,
      error:state.error,
      loading:state.loading
     };
   }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//       getPoverty: (tab) => {
-//         dispatch(getPopulation(state));
-//       },
-//       reset: (tab) => {
-//         dispatch(reset(tab))
-//       },
-//       saveData: (data,tab) => {
-//         dispatch(saveData(data,tab))
-//       }
-//     }
-//   };
-  export default connect(mapStateToProps )(Poverty);
+const mapDispatchToProps = (dispatch) => {
+    return {
+      getPoverty: (year) => {
+        dispatch(getPoverty(year));
+      },
+      reset: (tab) => {
+        dispatch(reset(tab))
+      },
+      saveData: (data,tab) => {
+        dispatch(saveData(data,tab))
+      }
+    }
+  };
+  export default connect(mapStateToProps,mapDispatchToProps )(Poverty);

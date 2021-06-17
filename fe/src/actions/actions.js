@@ -46,6 +46,8 @@ function loopThroughYears(tab,place,dispatch){
 
 
 }
+  
+ 
 }
 // function to login users for register and login actions
 
@@ -136,6 +138,23 @@ export function saveData(data,tab) {
     saveGraphData(data, tab,dispatch);
   }
 }
-export function getPoverty(){
-  
+export function getPoverty(year){
+  return (dispatch) => {
+    dispatch({
+      type:'GET_POVERTY_LOADING',
+      year:year,
+    })
+    [1,3,8,11,12].map(race => {
+      axios.get(`https://api.census.gov/data/timeseries/poverty/histpov2?get=PCTPOV&time=${year}&RACE=${race}`).then(
+        data => {
+          dispatch({
+            // Loggs that the user is successfully registered
+            type: "GET_POVERTY",
+            payload:data.data[1][0]
+          });
+        }
+      )
+    })
+    
 }
+  }

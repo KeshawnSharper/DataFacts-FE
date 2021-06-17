@@ -98,6 +98,27 @@ export const StoreReducer = (state = initState, action) => {
                     loading: false,
                     error:true
                   }
+                  case "GET_POVERTY_LOADING":
+            
+                  return {
+                    ...state,
+                    loading: true,
+                    poverty:[action.payload]
+                  }
+                  case "GET_POVERTY":
+            
+                  return {
+                    ...state,
+                    loading: false,
+                    poverty:[...state.poverty,action.payload]
+                  }
+                  case "GET_POVERTY_FAIL":
+            
+                  return {
+                    ...state,
+                    loading: false,
+                    error:true
+                  }
 
            
     default:
